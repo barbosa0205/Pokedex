@@ -30,6 +30,7 @@ const fetchAllPokemon = async () => {
 
 const updatePokemon = async pokename => {
   try {
+    pokename = pokename.toLowerCase();
     const pokemon = Promise.all(promises).then(results => {
       const pokemon = results.filter(data => {
         if (data.name === pokename) {
@@ -54,6 +55,7 @@ const displayPokemon = pokemon => {
       pokeman =>
         `
   <li class="list">
+  <p class="name">${pokeman.id}</p>
       <img src="${pokeman.image}" alt="${pokeman.name}" />
       <h2>${pokeman.name}</h2>
   </li>
