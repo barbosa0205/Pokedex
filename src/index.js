@@ -46,7 +46,7 @@ const fetchPokemonById = async (id) => {
     name: data.name,
     id: data.id,
     image: data.sprites.front_default,
-    type: data.types.map((type) => type.type.name).join(", "),
+    type: data.types,
   };
   displayPokemon2(pokemon);
 };
@@ -84,6 +84,9 @@ const updatePokemon = async (pokename) => {
       easterEggAlert();
     } else if (pokename === "wicho") {
       fetchPokemonById(129);
+      easterEggAlert();
+    } else if (pokename === "aquino") {
+      fetchPokemonById(124);
       easterEggAlert();
     }
     const pokemon = Promise.all(promises).then((results) => {
