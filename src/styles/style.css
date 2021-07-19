@@ -18,11 +18,13 @@ body {
 }
 
 header {
+  position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
   width: auto;
-  height: 100px;
+  padding-bottom: 10px;
   background: #3b3b3b83;
   box-shadow: 0 0 10px #3b3b3b83;
 }
@@ -34,6 +36,23 @@ header h1 {
   text-shadow: 0 0 2px #e2d30080;
 }
 
+.music {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #580f0f;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.music i {
+  font-size: 2rem;
+  color: #220000;
+}
+
 .pokedex-container {
   position: relative;
   display: flex;
@@ -41,6 +60,86 @@ header h1 {
   align-items: center;
   width: auto;
   height: 100vh;
+  margin-top: 10px;
+}
+
+.easter-egg-container {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0 auto;
+  visibility: hidden;
+}
+
+.easter-egg {
+  transition: 0.5 ease-in-out;
+  margin-top: 100px;
+  width: 300px;
+  height: 300px;
+  z-index: 2000;
+}
+
+.easter-visible {
+  transition: 0.5 ease-in-out;
+  visibility: visible;
+}
+.easter-hidden {
+  transition: 0.5 ease-in-out;
+  visibility: hidden;
+}
+
+.alert {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  width: 270px;
+  height: 80px;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 10px;
+  z-index: 2000;
+}
+
+.close-alert {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-alert i {
+  font-size: 1.4rem;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.alert h3 {
+  font-size: 1.6rem;
+  font-weight: normal;
+  font-family: superstar;
+}
+
+.alert span {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.hide-alert {
+  transition: 1s ease-in-out;
+  left: -270px;
+}
+
+.show-alert {
+  transition: 1s ease-in-out;
+  left: -20px;
 }
 
 .screen-container {
@@ -94,6 +193,10 @@ header h1 {
   border: 3px solid #830b1f;
 }
 
+#power-off {
+  cursor: pointer;
+}
+
 .line-container {
   display: flex;
   flex-direction: column;
@@ -128,7 +231,7 @@ header h1 {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 20%;
+  height: 15%;
 }
 
 .search {
@@ -201,8 +304,6 @@ header h1 {
   justify-content: center;
   align-items: center;
   width: 200px;
-  height: 250px;
-  padding-top: 50px;
   border-radius: 5px;
   transition: 0.5s ease-in;
 }
@@ -211,9 +312,14 @@ header h1 {
   text-shadow: 2px 2px 3px #000;
 }
 
+.card-container span {
+  font-size: 1.8rem;
+}
+
 .card-container .name {
   font-family: superstar;
   font-size: 3rem;
+  font-weight: 400;
   transition: 0.5s ease-in;
 }
 
@@ -225,6 +331,7 @@ header h1 {
 .card-container .type {
   font-family: superstar;
   font-size: 3rem;
+  font-weight: 400;
 }
 
 .electric {
@@ -261,6 +368,79 @@ header h1 {
   font-size: 2rem;
   text-shadow: -1px 1px 1px #8a868b;
   color: #d4d4d4;
+}
+
+.power-off {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1000;
+}
+
+.screen-off {
+  width: 100%;
+  background: rgb(2, 19, 0);
+}
+
+.screen-visible {
+  transition: 1s ease-in-out;
+  visibility: hidden;
+}
+
+.screen-hidden {
+  transition: 1s ease-in-out;
+  visibility: visible;
+}
+
+.off {
+  height: 50%;
+  animation: power-off 0.6s ease-in-out;
+}
+
+.on {
+  height: 0%;
+  animation: power-on 0.5s ease-in-out;
+}
+
+.loading-container {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+  bottom: 0;
+}
+
+.loading-container h2 {
+  font-family: superstar;
+  font-size: 3rem;
+  font-weight: 400;
+  color: #f3f3f3;
+  margin-top: 15px;
+  text-shadow: 2px 2px 3px #000;
+}
+
+@keyframes power-off {
+  0% {
+    height: 0%;
+  }
+
+  100% {
+    height: 50%;
+  }
+}
+
+@keyframes power-on {
+  0% {
+    height: 50%;
+  }
+
+  100% {
+    height: 0%;
+  }
 }
 
 @media (max-width: 600px) {

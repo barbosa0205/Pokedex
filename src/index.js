@@ -1,23 +1,33 @@
 const search = document.querySelector("#search");
 const btn = document.querySelector("#btn");
+const $powerOff = document.querySelector("#power-off");
+const screenOff = document.querySelector(".power-off");
+const $screenOff1 = document.querySelector("#screen-off-1");
+const $screenOff2 = document.querySelector("#screen-off-2");
+const $alert = document.querySelector(".alert");
+const $closeAlert = document.querySelector(".close-alert");
+const $music = document.querySelector("#music");
+const $theme = document.querySelector("#theme");
+const $easterEgg = document.querySelector("#easter-egg");
+const $themeEasterEgg = document.querySelector("#theme-easter-egg");
 
 const pokedex = document.querySelector("#pokedex");
 const promises = [];
 const fetchAllPokemon = async () => {
   try {
-    for (let i = 1; i <= 898; i++) {
+    for (let i = 1; i <= 800; i++) {
       const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
       const resp = await fetch(url);
       const data = await resp.json();
       promises.push(data);
     }
 
-    const pokemon = Promise.all(promises).then(results => {
-      const pokemon = results.map(data => ({
+    const pokemon = Promise.all(promises).then((results) => {
+      const pokemon = results.map((data) => ({
         name: data.name,
         id: data.id,
         image: data.sprites.front_default,
-        type: data.types.map(type => type.type.name).join(", ")
+        type: data.types.map((type) => type.type.name).join(", "),
       }));
       displayPokemon(pokemon);
     });
@@ -28,17 +38,62 @@ const fetchAllPokemon = async () => {
   }
 };
 
-const updatePokemon = async pokename => {
+const fetchPokemonById = async (id) => {
+  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+  const resp = await fetch(url);
+  const data = await resp.json();
+  const pokemon = {
+    name: data.name,
+    id: data.id,
+    image: data.sprites.front_default,
+    type: data.types.map((type) => type.type.name).join(", "),
+  };
+  displayPokemon2(pokemon);
+};
+
+const updatePokemon = async (pokename) => {
   try {
     pokename = pokename.toLowerCase();
-    const pokemon = Promise.all(promises).then(results => {
-      const pokemon = results.filter(data => {
+    if (pokename === "jordan" || pokename === "regio") {
+      fetchPokemonById(143);
+      easterEggAlert();
+    } else if (pokename === "chuy") {
+      fetchPokemonById(84);
+      easterEggAlert();
+    } else if (pokename === "apaparawe" || pokename === "montoya") {
+      fetchPokemonById(155);
+      easterEggAlert();
+    } else if (pokename === "chemas" || pokename === "pizza") {
+      fetchPokemonById(337);
+      easterEggAlert();
+    } else if (pokename === "apaparablack" || pokename === "carlos") {
+      fetchPokemonById(67);
+      easterEggAlert();
+    } else if (pokename === "aldo" || pokename === "nigga") {
+      fetchPokemonById(50);
+      easterEggAlert();
+    } else if (pokename === "alcantara" || pokename === "joto") {
+      fetchPokemonById(39);
+      easterEggAlert();
+    } else if (
+      pokename === "pablo" ||
+      pokename === "marihuano" ||
+      pokename === "marihuas"
+    ) {
+      fetchPokemonById(109);
+      easterEggAlert();
+    } else if (pokename === "wicho") {
+      fetchPokemonById(129);
+      easterEggAlert();
+    }
+    const pokemon = Promise.all(promises).then((results) => {
+      const pokemon = results.filter((data) => {
         if (data.name === pokename) {
           const pokemon = {
             name: data.name,
             id: data.id,
             image: data.sprites.front_default,
-            type: data.types.map(type => type.type.name).join(", ")
+            type: data.types.map((type) => type.type.name).join(", "),
           };
           displayPokemon2(pokemon);
         }
@@ -49,10 +104,10 @@ const updatePokemon = async pokename => {
   }
 };
 
-const displayPokemon = pokemon => {
+const displayPokemon = (pokemon) => {
   const pokemonHTMLString = pokemon
     .map(
-      pokeman =>
+      (pokeman) =>
         `
   <li class="list">
   <p class="name">${pokeman.id}</p>
@@ -66,10 +121,11 @@ const displayPokemon = pokemon => {
   pokedex.innerHTML = pokemonHTMLString;
 };
 
-const displayPokemon2 = async pokemon => {
+const displayPokemon2 = async (pokemon) => {
   const pokemonHTMLString = `
 <article class="card-container">
   <p class="name">${pokemon.name}</p>
+  <span>${pokemon.id}</span>
   <img src="${pokemon.image}" alt="${pokemon.name}" />
   <p class='type'>${pokemon.type}</p>
   <div id="back" class="back-container">
@@ -99,13 +155,20 @@ const displayPokemon2 = async pokemon => {
     pikaname.classList.add("poison");
   }
   back.addEventListener("click", () => {
-    location.reload();
+    const div = document.createElement("div");
+    const h2 = document.createElement("h2");
+    h2.textContent = "Loading...";
+    div.append(h2);
+    div.classList.add("loading-container");
+    pokedex.append(div);
+    fetchAllPokemon();
+    search.value = "";
   });
 };
 
 fetchAllPokemon();
 
-search.addEventListener("keydown", e => {
+search.addEventListener("keydown", (e) => {
   if (e.keyCode === 13) {
     updatePokemon(search.value);
   }
@@ -114,3 +177,66 @@ search.addEventListener("keydown", e => {
 btn.addEventListener("click", () => {
   updatePokemon(search.value);
 });
+
+$closeAlert.addEventListener("click", () => {
+  $alert.classList.add("hide-alert");
+  $alert.classList.remove("show-alert");
+});
+
+let powerOff = true;
+let music = false;
+$powerOff.addEventListener("click", () => {
+  if (!powerOff) {
+    screenOff.classList.add("screen-hidden");
+    screenOff.classList.remove("screen-visible");
+    $screenOff1.classList.remove("on");
+    $screenOff2.classList.remove("on");
+
+    $screenOff1.classList.add("off");
+    $screenOff2.classList.add("off");
+    $theme.pause();
+    music = false;
+    powerOff = true;
+  } else {
+    screenOff.classList.add("screen-visible");
+    screenOff.classList.remove("screen-hidden");
+    $screenOff1.classList.remove("off");
+    $screenOff2.classList.remove("off");
+    $screenOff1.classList.add("on");
+    $screenOff2.classList.add("on");
+    $theme.play();
+    music = true;
+    powerOff = false;
+  }
+});
+
+$music.addEventListener("click", () => {
+  if (powerOff) {
+    return;
+  } else {
+    if (music) {
+      $theme.pause();
+      music = false;
+    } else {
+      $theme.play();
+      music = true;
+    }
+  }
+});
+
+setTimeout(() => {
+  $alert.classList.remove("hide-alert");
+  $alert.classList.add("show-alert");
+}, 5000);
+
+const easterEggAlert = () => {
+  $theme.pause();
+  $themeEasterEgg.play();
+  $easterEgg.classList.remove("easter-hidden");
+  $easterEgg.classList.add("easter-visible");
+  setTimeout(() => {
+    $easterEgg.classList.remove("easter-visible");
+    $easterEgg.classList.add("easter-hidden");
+    $theme.play();
+  }, 3000);
+};

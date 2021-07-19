@@ -13,15 +13,36 @@
   </head>
   <body>
     <header>
-      <h1>POKEDEX</h1>
+      <div class="title">
+        <h1>POKEDEX</h1>
+      </div>
+      <div id="music" class="music">
+        <audio id="theme" src="./src/media/pokemontheme.mp3" loop></audio>
+        <i class="fas fa-music"></i>
+      </div>
     </header>
+    <div id="easter-egg" class="easter-egg-container easter-hidden">
+      <img class="easter-egg" src="./src/images/easter-egg.gif" />
+      <audio id="theme-easter-egg" src="./src/media/easter-egg.mp3"></audio>
+    </div>
     <div class="pokedex-container">
+      <div class="alert hide-alert">
+        <div class="close-alert">
+          <i class="fas fa-times"></i>
+        </div>
+        <h3>Press The Red Button</h3>
+        <span class="red-btn btn-big"></span>
+      </div>
       <div class="screen-container">
         <div class="red-btn-container">
           <div class="red-btn"></div>
           <div class="red-btn"></div>
         </div>
         <main class="screen">
+          <div class="power-off screen-hidden">
+            <div id="screen-off-1" class="screen-off off"></div>
+            <div id="screen-off-2" class="screen-off off"></div>
+          </div>
           <div class="search-container">
             <div class="search">
               <input
@@ -37,7 +58,7 @@
           <ul id="pokedex" class="pokemon-list-container"></ul>
         </main>
         <div class="btn-line-container">
-          <div class="red-btn btn-big"></div>
+          <div id="power-off" class="red-btn btn-big"></div>
           <div class="line-container">
             <div class="line"></div>
             <div class="line"></div>
