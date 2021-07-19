@@ -354,6 +354,10 @@ header h1 {
   color: #e182fa;
 }
 
+.normal {
+  color: #d3d3d3;
+}
+
 .back-container {
   display: flex;
   justify-content: center;

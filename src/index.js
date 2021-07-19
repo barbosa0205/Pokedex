@@ -27,7 +27,7 @@ const fetchAllPokemon = async () => {
         name: data.name,
         id: data.id,
         image: data.sprites.front_default,
-        type: data.types.map((type) => type.type.name).join(", "),
+        type: data.types[0].type.name,
       }));
       displayPokemon(pokemon);
     });
@@ -46,7 +46,7 @@ const fetchPokemonById = async (id) => {
     name: data.name,
     id: data.id,
     image: data.sprites.front_default,
-    type: data.types,
+    type: data.types[0].type.name,
   };
   displayPokemon2(pokemon);
 };
@@ -85,8 +85,8 @@ const updatePokemon = async (pokename) => {
     } else if (pokename === "wicho") {
       fetchPokemonById(129);
       easterEggAlert();
-    } else if (pokename === "aquino") {
-      fetchPokemonById(124);
+    } else if (pokename === "keila") {
+      fetchPokemonById(471);
       easterEggAlert();
     }
     const pokemon = Promise.all(promises).then((results) => {
@@ -96,7 +96,7 @@ const updatePokemon = async (pokename) => {
             name: data.name,
             id: data.id,
             image: data.sprites.front_default,
-            type: data.types.map((type) => type.type.name).join(", "),
+            type: data.types[0].type.name,
           };
           displayPokemon2(pokemon);
         }
@@ -153,6 +153,12 @@ const displayPokemon2 = async (pokemon) => {
   } else if (pokemon.type === "bug") {
     type.classList.add("bug");
     pikaname.classList.add("bug");
+  } else if (pokemon.type === "poison") {
+    type.classList.add("poison");
+    pikaname.classList.add("poison");
+  } else if (pokemon.type === "normal") {
+    type.classList.add("normal");
+    pikaname.classList.add("normal");
   } else if (pokemon.type === "poison") {
     type.classList.add("poison");
     pikaname.classList.add("poison");
