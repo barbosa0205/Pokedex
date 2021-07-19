@@ -355,7 +355,11 @@ header h1 {
 }
 
 .normal {
-  color: #d3d3d3;
+  color: #e7e7e7;
+}
+
+.rock {
+  color: #afafaf;
 }
 
 .back-container {
@@ -410,20 +414,18 @@ header h1 {
 }
 
 .loading-container {
-  position: absolute;
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 60px;
-  bottom: 0;
+  height: 100%;
 }
 
 .loading-container h2 {
   font-family: superstar;
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 400;
   color: #f3f3f3;
-  margin-top: 15px;
+  margin-top: 50px;
   text-shadow: 2px 2px 3px #000;
 }
 

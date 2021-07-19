@@ -162,14 +162,19 @@ const displayPokemon2 = async (pokemon) => {
   } else if (pokemon.type === "poison") {
     type.classList.add("poison");
     pikaname.classList.add("poison");
+  } else if (pokemon.type === "rock") {
+    type.classList.add("rock");
+    pikaname.classList.add("rock");
   }
   back.addEventListener("click", () => {
+    pokedex.textContent = "";
     const div = document.createElement("div");
     const h2 = document.createElement("h2");
     h2.textContent = "Loading...";
     div.append(h2);
     div.classList.add("loading-container");
     pokedex.append(div);
+
     fetchAllPokemon();
     search.value = "";
   });
