@@ -15,7 +15,7 @@ const pokedex = document.querySelector("#pokedex");
 const promises = [];
 const fetchAllPokemon = async () => {
   try {
-    for (let i = 1; i <= 800; i++) {
+    for (let i = 1; i <= 500; i++) {
       const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
       const resp = await fetch(url);
       const data = await resp.json();
